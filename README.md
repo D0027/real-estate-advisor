@@ -63,6 +63,42 @@ Built on top of Indian real-estate data, wrapped in a custom glassmorphism UI wi
 
 ## 🧠 How It Works
 
+```mermaid
+flowchart TD
+    A["🗂️ Raw Housing Data <br/><sub>Kaggle</sub>"] --> B
+    B["🧹 Cleaning · Feature Engineering<br/><sub>Price/SqFt · Age · School & Hospital Density · Transport Score</sub>"] --> C
+    B --> D
+
+    subgraph MODELS[" "]
+        direction LR
+        C["🏷️ <b>Classification</b><br/><sub>Good Investment?</sub><br/><sub>LogReg / RF / XGBoost</sub>"]
+        D["📈 <b>Regression</b><br/><sub>5-Year Price Forecast</sub><br/><sub>LogReg / RF / XGBoost</sub>"]
+    end
+
+    C --> E
+    D --> E
+    E["📦 Best Pipelines Selected<br/><sub>saved via joblib · tracked with MLflow</sub>"] --> F
+    F["🚀 Streamlit App<br/><sub>this repo</sub>"]
+
+    classDef data fill:#0F131C,stroke:#00D4B4,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
+    classDef process fill:#0F131C,stroke:#6C8CFF,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
+    classDef model fill:#101820,stroke:#00E8C4,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
+    classDef output fill:#101820,stroke:#C084FC,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
+    classDef app fill:linear-gradient(#00D4B4,#17B8E3),stroke:#00D4B4,stroke-width:2px,color:#04140F,rx:10,ry:10
+
+    class A data
+    class B process
+    class C,D model
+    class E output
+    class F app
+    style MODELS fill:none,stroke:#2A3140,stroke-dasharray: 4 3
+```
+
+> 💡 The best-performing pipeline for each task is selected automatically and serialized with `joblib`; MLflow tracks every experiment run so results stay reproducible. The Streamlit app simply loads the winning pipelines and serves predictions in real time.
+
+<details>
+<summary>📋 Prefer plain text? Click to expand the flow</summary>
+
 ```
 Raw Housing Data (Kaggle)
         │
@@ -71,11 +107,11 @@ Cleaning · Feature Engineering
 (Price/SqFt, Age, School/Hospital Density, Transport Score)
         │
         ▼
-┌────────────────────┬─────────────────────┐
-│  Classification     │   Regression         │
-│  (Good Investment)  │   (5-Year Price)      │
-│  LogReg / RF / XGB   │   LogReg / RF / XGB   │
-└────────────────────┴─────────────────────┘
+┌──────────────────────┬──────────────────────┐
+│   Classification      │      Regression        │
+│  (Good Investment)    │    (5-Year Price)       │
+│   LogReg / RF / XGB    │    LogReg / RF / XGB     │
+└──────────────────────┴──────────────────────┘
         │
         ▼
 Best pipelines saved via joblib + MLflow tracked
@@ -84,7 +120,7 @@ Best pipelines saved via joblib + MLflow tracked
    Streamlit App (this repo)
 ```
 
-The best-performing pipeline for each task is selected automatically and serialized with `joblib`; the Streamlit app simply loads and serves them.
+</details>
 
 ---
 
