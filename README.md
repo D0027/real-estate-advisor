@@ -84,7 +84,7 @@ flowchart TD
     classDef process fill:#0F131C,stroke:#6C8CFF,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
     classDef model fill:#101820,stroke:#00E8C4,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
     classDef output fill:#101820,stroke:#C084FC,stroke-width:1.5px,color:#E8EDF2,rx:10,ry:10
-    classDef app fill:linear-gradient(#00D4B4,#17B8E3),stroke:#00D4B4,stroke-width:2px,color:#04140F,rx:10,ry:10
+    classDef app fill:#00D4B4,stroke:#00E8C4,stroke-width:2px,color:#04140F,rx:10,ry:10
 
     class A data
     class B process
